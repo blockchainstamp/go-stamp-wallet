@@ -1,0 +1,89 @@
+package go_stamp_wallet
+
+import (
+	"crypto/ed25519"
+	"crypto/rand"
+	"encoding/json"
+	"errors"
+	"os"
+)
+
+const (
+	WalletVersion = "1"
+)
+
+var (
+	WOpenErr = errors.New("open wallet failed")
+)
+
+type Wallet interface {
+	Open(auth string) error
+	Close()
+}
+
+type SimpleWallet struct {
+	Version string  `json:"version"`
+	Addr    Address `json:"address"`
+	Cipher  string  `json:"cipher"`
+	priKey  ed25519.PrivateKey
+}
+
+func CreateWallet(auth string) (Wallet, error) {
+	pub, pri, err := ed25519.GenerateKey(rand.Reader)
+	if err != nil {
+		return nil, err
+	}
+	cipherTxt, err := encryptPriKey(pri, pub, auth)
+	if err != nil {
+		return nil, err
+	}
+	sw := &SimpleWallet{
+		Version: WalletVersion,
+		Cipher:  cipherTxt,
+		Addr:    PubToAddr(pub),
+		priKey:  pri,
+	}
+	return sw, nil
+}
+
+func LoadByJsonData(jsonStr string) (Wallet, error) {
+	w := new(SimpleWallet)
+	if err := json.Unmarshal([]byte(jsonStr), w); err != nil {
+		return nil, err
+	}
+	return w, nil
+}
+
+func LoadByFile(path string) (Wallet, error) {
+	bts, err := os.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+	w := new(SimpleWallet)
+	if err := json.Unmarshal(bts, w); err != nil {
+		return nil, err
+	}
+	return w, nil
+}
+
+func (sw *SimpleWallet) Close() {
+	sw.priKey = nil
+}
+
+func (sw *SimpleWallet) Open(auth string) error {
+	if sw.priKey != nil {
+		return nil
+	}
+
+	pri, err := decryptPriKey(sw.Cipher, auth)
+	if err != nil {
+		return err
+	}
+	pub := pri.Public().(ed25519.PublicKey)
+	addr := PubToAddr(pub)
+	if addr != sw.Addr {
+		return WOpenErr
+	}
+	sw.priKey = pri
+	return nil
+}
