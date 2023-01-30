@@ -1,4 +1,4 @@
-package go_stamp_wallet
+package comm
 
 import (
 	"crypto/aes"
@@ -6,7 +6,6 @@ import (
 	"crypto/ed25519"
 	"crypto/rand"
 	"crypto/sha512"
-	"encoding/json"
 	"fmt"
 	"github.com/btcsuite/btcutil/base58"
 	"golang.org/x/crypto/scrypt"
@@ -79,19 +78,19 @@ func AESKey(salt []byte, password string) ([]byte, error) {
 	return scrypt.Key([]byte(password), salt, KP.N, KP.R, KP.P, KP.L)
 }
 
-func encryptPriKey(priKey ed25519.PrivateKey, pubKey ed25519.PublicKey, auth string) (string, error) {
+func encryptPriKey(priKey ed25519.PrivateKey, auth string) (*CipherData, error) {
 	salt := make([]byte, KP.S)
 	_, err := rand.Read(salt)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 	aesKey, err := AESKey(salt, auth)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 	ci, err := Encrypt(aesKey, priKey[:])
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
 	ciData := &CipherData{
@@ -101,11 +100,8 @@ func encryptPriKey(priKey ed25519.PrivateKey, pubKey ed25519.PublicKey, auth str
 		Salt:      base58.Encode(salt),
 		PriCipher: base58.Encode(ci),
 	}
-	bs, err := json.MarshalIndent(ciData, "", "\t")
-	if err != nil {
-		return "", err
-	}
-	return string(bs), nil // ,base58.Encode(ci)
+
+	return ciData, nil // ,base58.Encode(ci)
 }
 
 func PrivateKeyToCurve25519(curve25519Private *[32]byte, privateKey *[64]byte) {
@@ -120,14 +116,7 @@ func PrivateKeyToCurve25519(curve25519Private *[32]byte, privateKey *[64]byte) {
 	copy(curve25519Private[:], digest)
 }
 
-func decryptPriKey(cpTxt, auth string) (ed25519.PrivateKey, error) {
-
-	ciData := &CipherData{}
-
-	err := json.Unmarshal([]byte(cpTxt), ciData)
-	if err != nil {
-		return nil, err
-	}
+func decryptPriKey(ciData *CipherData, auth string) (ed25519.PrivateKey, error) {
 	salt := base58.Decode(ciData.Salt)
 	aesKey, err := AESKey(salt, auth)
 	if err != nil {

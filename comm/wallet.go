@@ -1,4 +1,4 @@
-package go_stamp_wallet
+package comm
 
 import (
 	"crypto/ed25519"
@@ -17,14 +17,16 @@ var (
 )
 
 type Wallet interface {
+	Address() Address
 	Open(auth string) error
+	Verbose() string
 	Close()
 }
 
 type SimpleWallet struct {
-	Version string  `json:"version"`
-	Addr    Address `json:"address"`
-	Cipher  string  `json:"cipher"`
+	Version string      `json:"version"`
+	Addr    Address     `json:"address"`
+	Cipher  *CipherData `json:"cipher"`
 	priKey  ed25519.PrivateKey
 }
 
@@ -33,7 +35,7 @@ func CreateWallet(auth string) (Wallet, error) {
 	if err != nil {
 		return nil, err
 	}
-	cipherTxt, err := encryptPriKey(pri, pub, auth)
+	cipherTxt, err := encryptPriKey(pri, auth)
 	if err != nil {
 		return nil, err
 	}
@@ -86,4 +88,11 @@ func (sw *SimpleWallet) Open(auth string) error {
 	}
 	sw.priKey = pri
 	return nil
+}
+func (sw *SimpleWallet) Address() Address {
+	return sw.Addr
+}
+func (sw *SimpleWallet) Verbose() string {
+	bts, _ := json.MarshalIndent(sw, "", "\t")
+	return string(bts)
 }

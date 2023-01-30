@@ -1,4 +1,4 @@
-package go_stamp_wallet
+package comm
 
 import (
 	"errors"
