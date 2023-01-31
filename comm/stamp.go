@@ -1,11 +1,21 @@
 package comm
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"github.com/ethereum/go-ethereum/common"
+)
 
 type Stamp interface {
 	Serial() string
 }
-
+type StampData interface {
+	SetMsgID(id string)
+	SetNo(no int)
+	GetWalletAddr() WalletAddr
+	GetStampAddr() StampAddr
+	SetEthAddr(addr common.Address)
+	InitByBlockChain(addr common.Address)
+}
 type StampSig interface {
 	Sig() []byte
 	Suffix() string
@@ -24,9 +34,8 @@ func (sss *SimpleStampSig) Suffix() string {
 }
 
 type SimpleStamp struct {
-	From  string
-	MsgID string
-	Sig   StampSig
+	Data StampData
+	Sig  StampSig
 }
 
 func (ss *SimpleStamp) Serial() string {
@@ -34,13 +43,33 @@ func (ss *SimpleStamp) Serial() string {
 	return string(bts)
 }
 
-func NewStamp(from, msg string) Stamp {
-	return &SimpleStamp{
-		From:  from,
-		MsgID: msg,
-		Sig: &SimpleStampSig{
-			SigData:   make([]byte, 10),
-			PubSuffix: "TODO::",
-		},
-	}
+type RawStamp struct {
+	WAddr        WalletAddr     `json:"wallet_addr"`
+	SAdr         StampAddr      `json:"stamp_addr"`
+	EAddr        common.Address `json:"eth_addr"`
+	FromMailAddr string         `json:"from_mail_addr"`
+	MsgID        string         `json:"msg_id"`
+	No           int            `json:"no"`
+}
+
+func (r *RawStamp) GetWalletAddr() WalletAddr {
+	return r.WAddr
+}
+
+func (r *RawStamp) GetStampAddr() StampAddr {
+	return r.SAdr
+}
+
+func (r *RawStamp) SetMsgID(id string) {
+	r.MsgID = id
+}
+
+func (r *RawStamp) SetNo(no int) {
+	r.No = no
+}
+func (r *RawStamp) SetEthAddr(addr common.Address) {
+	r.EAddr = addr
+}
+func (r *RawStamp) InitByBlockChain(addr common.Address) {
+
 }

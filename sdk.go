@@ -34,11 +34,13 @@ func InitSDK(baseDir string) error {
 
 type StampSdk interface {
 	CreateWallet(auth string) (comm.Wallet, error)
-	GetWallet(addr comm.Address) (comm.Wallet, error)
+	GetWallet(addr comm.WalletAddr) (comm.Wallet, error)
 	ListAllWalletAddr() string
-	PrepareWallet(walletAddr comm.Address, auth string) error
-	CreateStamp(from, mID string) (comm.Stamp, error)
-	ActiveStamp(user, stamp string) error
+	PrepareWallet(walletAddr comm.WalletAddr, auth string) error
+	SignStamp(sData comm.StampData) (comm.Stamp, error)
+	ActiveStamp(user string, stamp comm.StampAddr) error
+	GetActiveStamp(user string) comm.StampAddr
+	UpdateStampBalanceAsync(sAddr comm.StampAddr)
 }
 
 var (

@@ -5,6 +5,8 @@ import (
 	"crypto/rand"
 	"encoding/json"
 	"errors"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/crypto"
 	"os"
 )
 
@@ -17,16 +19,20 @@ var (
 )
 
 type Wallet interface {
-	Address() Address
+	Address() WalletAddr
 	Open(auth string) error
 	Verbose() string
 	Close()
+	Sign(s StampData) StampSig
+	IsOpen() bool
+	EthAddr() common.Address
 }
 
 type SimpleWallet struct {
-	Version string      `json:"version"`
-	Addr    Address     `json:"address"`
-	Cipher  *CipherData `json:"cipher"`
+	Version string         `json:"version"`
+	Addr    WalletAddr     `json:"address"`
+	EAddr   common.Address `json:"eth_addr"`
+	Cipher  *CipherData    `json:"cipher"`
 	priKey  ed25519.PrivateKey
 }
 
@@ -39,12 +45,16 @@ func CreateWallet(auth string) (Wallet, error) {
 	if err != nil {
 		return nil, err
 	}
+	ethPri := crypto.ToECDSAUnsafe(pri[:crypto.DigestLength])
+
 	sw := &SimpleWallet{
 		Version: WalletVersion,
 		Cipher:  cipherTxt,
 		Addr:    PubToAddr(pub),
+		EAddr:   crypto.PubkeyToAddress(ethPri.PublicKey),
 		priKey:  pri,
 	}
+
 	return sw, nil
 }
 
@@ -89,10 +99,20 @@ func (sw *SimpleWallet) Open(auth string) error {
 	sw.priKey = pri
 	return nil
 }
-func (sw *SimpleWallet) Address() Address {
+func (sw *SimpleWallet) Address() WalletAddr {
 	return sw.Addr
 }
 func (sw *SimpleWallet) Verbose() string {
 	bts, _ := json.MarshalIndent(sw, "", "\t")
 	return string(bts)
+}
+
+func (sw *SimpleWallet) Sign(s StampData) StampSig {
+	return nil
+}
+func (sw *SimpleWallet) IsOpen() bool {
+	return sw.priKey != nil
+}
+func (sw *SimpleWallet) EthAddr() common.Address {
+	return sw.EAddr
 }

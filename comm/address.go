@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-type Address string
+type WalletAddr string
 
 const (
 	AccPrefix = "BS"
@@ -17,15 +17,15 @@ var (
 	InvalidAddr = errors.New("invalid address")
 )
 
-func PubToAddr(key []byte) Address {
+func PubToAddr(key []byte) WalletAddr {
 	codedKey := base58.Encode(key)
 	if len(codedKey) > AccLen {
 		codedKey = string([]byte(codedKey)[:AccLen])
 	}
-	return Address(AccPrefix + codedKey)
+	return WalletAddr(AccPrefix + codedKey)
 }
 
-func RecoverPub(addr Address, sub string) ([]byte, error) {
+func RecoverPub(addr WalletAddr, sub string) ([]byte, error) {
 	if len(addr) < AccLen {
 		return nil, InvalidAddr
 	}
@@ -33,3 +33,5 @@ func RecoverPub(addr Address, sub string) ([]byte, error) {
 	source = strings.TrimPrefix(source, AccPrefix)
 	return base58.Decode(source), nil
 }
+
+type StampAddr string
