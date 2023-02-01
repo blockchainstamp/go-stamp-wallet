@@ -7,26 +7,31 @@ import (
 
 type Stamp interface {
 	Serial() string
+	RawData() StampData
+	SigData() StampSig
 }
 type StampData interface {
 	SetMsgID(id string)
+	GetMailSender() string
 	SetNo(no int)
 	GetWalletAddr() WalletAddr
 	GetStampAddr() StampAddr
+	GetMailID() string
 	SetEthAddr(addr common.Address)
-	InitByBlockChain(addr common.Address)
+	SetAddr(addr WalletAddr)
+	IsValidInitData() bool
 }
 type StampSig interface {
-	Sig() []byte
+	Data() string
 	Suffix() string
 }
 
 type SimpleStampSig struct {
-	SigData   []byte
+	SigData   string
 	PubSuffix string
 }
 
-func (sss *SimpleStampSig) Sig() []byte {
+func (sss *SimpleStampSig) Data() string {
 	return sss.SigData
 }
 func (sss *SimpleStampSig) Suffix() string {
@@ -34,8 +39,16 @@ func (sss *SimpleStampSig) Suffix() string {
 }
 
 type SimpleStamp struct {
-	Data StampData
-	Sig  StampSig
+	Data *RawStamp
+	Sig  *SimpleStampSig
+}
+
+func (ss *SimpleStamp) RawData() StampData {
+	return ss.Data
+}
+
+func (ss *SimpleStamp) SigData() StampSig {
+	return ss.Sig
 }
 
 func (ss *SimpleStamp) Serial() string {
@@ -45,11 +58,12 @@ func (ss *SimpleStamp) Serial() string {
 
 type RawStamp struct {
 	WAddr        WalletAddr     `json:"wallet_addr"`
-	SAdr         StampAddr      `json:"stamp_addr"`
+	SAddr        StampAddr      `json:"stamp_addr"`
 	EAddr        common.Address `json:"eth_addr"`
 	FromMailAddr string         `json:"from_mail_addr"`
 	MsgID        string         `json:"msg_id"`
 	No           int            `json:"no"`
+	Time         int64          `json:"time"`
 }
 
 func (r *RawStamp) GetWalletAddr() WalletAddr {
@@ -57,7 +71,7 @@ func (r *RawStamp) GetWalletAddr() WalletAddr {
 }
 
 func (r *RawStamp) GetStampAddr() StampAddr {
-	return r.SAdr
+	return r.SAddr
 }
 
 func (r *RawStamp) SetMsgID(id string) {
@@ -70,6 +84,17 @@ func (r *RawStamp) SetNo(no int) {
 func (r *RawStamp) SetEthAddr(addr common.Address) {
 	r.EAddr = addr
 }
-func (r *RawStamp) InitByBlockChain(addr common.Address) {
 
+func (r *RawStamp) GetMailID() string {
+	return r.MsgID
+}
+func (r *RawStamp) GetMailSender() string {
+	return r.FromMailAddr
+}
+
+func (r *RawStamp) IsValidInitData() bool {
+	return len(r.SAddr) > 0 && len(r.FromMailAddr) > 0 && len(r.MsgID) > 0
+}
+func (r *RawStamp) SetAddr(addr WalletAddr) {
+	r.WAddr = addr
 }

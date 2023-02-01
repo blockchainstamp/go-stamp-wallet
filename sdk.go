@@ -3,6 +3,8 @@ package bstamp
 import (
 	"github.com/blockchainstamp/go-stamp-wallet/comm"
 	"github.com/blockchainstamp/go-stamp-wallet/sdk_v1"
+	contract "github.com/blockchainstamp/go-stamp-wallet/smart_contract"
+	"github.com/sirupsen/logrus"
 	"github.com/syndtr/goleveldb/leveldb"
 	"github.com/syndtr/goleveldb/leveldb/filter"
 	"github.com/syndtr/goleveldb/leveldb/opt"
@@ -32,15 +34,20 @@ func InitSDK(baseDir string) error {
 	return nil
 }
 
+func SetLogLevel(level logrus.Level) {
+	logrus.SetLevel(level)
+}
+
 type StampSdk interface {
 	CreateWallet(auth string) (comm.Wallet, error)
 	GetWallet(addr comm.WalletAddr) (comm.Wallet, error)
 	ListAllWalletAddr() string
-	PrepareWallet(walletAddr comm.WalletAddr, auth string) error
-	SignStamp(sData comm.StampData) (comm.Stamp, error)
-	ActiveStamp(user string, stamp comm.StampAddr) error
-	GetActiveStamp(user string) comm.StampAddr
-	UpdateStampBalanceAsync(sAddr comm.StampAddr)
+	ActiveWallet(walletAddr comm.WalletAddr, auth string) (comm.Wallet, error)
+	PostStamp(sData comm.StampData) (comm.Stamp, error)
+	SetStamp(user string, stamp comm.StampAddr) error
+	GetStamp(user string) *contract.StampConf
+	UpdateStampBalanceAsync(mailUser string)
+	VerifyStamp(stamp, mail string) error
 }
 
 var (

@@ -26,8 +26,14 @@ var (
 	_ = event.NewSubscription
 )
 
+// StampRecord is an auto generated low-level Go binding around an user-defined struct.
+type StampRecord struct {
+	Value *big.Int
+	Nonce *big.Int
+}
+
 // StampABI is the input ABI used to generate the binding from.
-const StampABI = "[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"number\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"mailbox\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"shorts\",\"type\":\"string\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnerSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"INITIAL_SUPPLY\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"}],\"name\":\"allowance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"approve\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"changeOwner\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"decimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"subtractedValue\",\"type\":\"uint256\"}],\"name\":\"decreaseAllowance\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getOwner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"addedValue\",\"type\":\"uint256\"}],\"name\":\"increaseAllowance\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"transfer\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"transferFrom\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]"
+const StampABI = "[{\"inputs\":[{\"internalType\":\"string\",\"name\":\"mailboxName\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"consummable\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newAdmin\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"add\",\"type\":\"bool\"}],\"name\":\"AdminOP\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnerSet\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Revoke\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"}],\"name\":\"BalanceOf\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"}],\"internalType\":\"structStamp.Record\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"addr\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"isAdd\",\"type\":\"bool\"}],\"name\":\"adminOp\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"admins\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"changeOwner\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"conf\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"MailBoxName\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"IsConsummable\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"decimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"revoke\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"transfer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]"
 
 // Stamp is an auto generated Go binding around an Ethereum contract.
 type Stamp struct {
@@ -171,97 +177,108 @@ func (_Stamp *StampTransactorRaw) Transact(opts *bind.TransactOpts, method strin
 	return _Stamp.Contract.contract.Transact(opts, method, params...)
 }
 
-// INITIALSUPPLY is a free data retrieval call binding the contract method 0x2ff2e9dc.
+// BalanceOf is a free data retrieval call binding the contract method 0xd9967889.
 //
-// Solidity: function INITIAL_SUPPLY() view returns(uint256)
-func (_Stamp *StampCaller) INITIALSUPPLY(opts *bind.CallOpts) (*big.Int, error) {
+// Solidity: function BalanceOf(address user) view returns((uint256,uint256))
+func (_Stamp *StampCaller) BalanceOf(opts *bind.CallOpts, user common.Address) (StampRecord, error) {
 	var out []interface{}
-	err := _Stamp.contract.Call(opts, &out, "INITIAL_SUPPLY")
+	err := _Stamp.contract.Call(opts, &out, "BalanceOf", user)
 
 	if err != nil {
-		return *new(*big.Int), err
+		return *new(StampRecord), err
 	}
 
-	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+	out0 := *abi.ConvertType(out[0], new(StampRecord)).(*StampRecord)
 
 	return out0, err
 
 }
 
-// INITIALSUPPLY is a free data retrieval call binding the contract method 0x2ff2e9dc.
+// BalanceOf is a free data retrieval call binding the contract method 0xd9967889.
 //
-// Solidity: function INITIAL_SUPPLY() view returns(uint256)
-func (_Stamp *StampSession) INITIALSUPPLY() (*big.Int, error) {
-	return _Stamp.Contract.INITIALSUPPLY(&_Stamp.CallOpts)
+// Solidity: function BalanceOf(address user) view returns((uint256,uint256))
+func (_Stamp *StampSession) BalanceOf(user common.Address) (StampRecord, error) {
+	return _Stamp.Contract.BalanceOf(&_Stamp.CallOpts, user)
 }
 
-// INITIALSUPPLY is a free data retrieval call binding the contract method 0x2ff2e9dc.
+// BalanceOf is a free data retrieval call binding the contract method 0xd9967889.
 //
-// Solidity: function INITIAL_SUPPLY() view returns(uint256)
-func (_Stamp *StampCallerSession) INITIALSUPPLY() (*big.Int, error) {
-	return _Stamp.Contract.INITIALSUPPLY(&_Stamp.CallOpts)
+// Solidity: function BalanceOf(address user) view returns((uint256,uint256))
+func (_Stamp *StampCallerSession) BalanceOf(user common.Address) (StampRecord, error) {
+	return _Stamp.Contract.BalanceOf(&_Stamp.CallOpts, user)
 }
 
-// Allowance is a free data retrieval call binding the contract method 0xdd62ed3e.
+// Admins is a free data retrieval call binding the contract method 0x429b62e5.
 //
-// Solidity: function allowance(address owner, address spender) view returns(uint256)
-func (_Stamp *StampCaller) Allowance(opts *bind.CallOpts, owner common.Address, spender common.Address) (*big.Int, error) {
+// Solidity: function admins(address ) view returns(bool)
+func (_Stamp *StampCaller) Admins(opts *bind.CallOpts, arg0 common.Address) (bool, error) {
 	var out []interface{}
-	err := _Stamp.contract.Call(opts, &out, "allowance", owner, spender)
+	err := _Stamp.contract.Call(opts, &out, "admins", arg0)
 
 	if err != nil {
-		return *new(*big.Int), err
+		return *new(bool), err
 	}
 
-	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
 
 	return out0, err
 
 }
 
-// Allowance is a free data retrieval call binding the contract method 0xdd62ed3e.
+// Admins is a free data retrieval call binding the contract method 0x429b62e5.
 //
-// Solidity: function allowance(address owner, address spender) view returns(uint256)
-func (_Stamp *StampSession) Allowance(owner common.Address, spender common.Address) (*big.Int, error) {
-	return _Stamp.Contract.Allowance(&_Stamp.CallOpts, owner, spender)
+// Solidity: function admins(address ) view returns(bool)
+func (_Stamp *StampSession) Admins(arg0 common.Address) (bool, error) {
+	return _Stamp.Contract.Admins(&_Stamp.CallOpts, arg0)
 }
 
-// Allowance is a free data retrieval call binding the contract method 0xdd62ed3e.
+// Admins is a free data retrieval call binding the contract method 0x429b62e5.
 //
-// Solidity: function allowance(address owner, address spender) view returns(uint256)
-func (_Stamp *StampCallerSession) Allowance(owner common.Address, spender common.Address) (*big.Int, error) {
-	return _Stamp.Contract.Allowance(&_Stamp.CallOpts, owner, spender)
+// Solidity: function admins(address ) view returns(bool)
+func (_Stamp *StampCallerSession) Admins(arg0 common.Address) (bool, error) {
+	return _Stamp.Contract.Admins(&_Stamp.CallOpts, arg0)
 }
 
-// BalanceOf is a free data retrieval call binding the contract method 0x70a08231.
+// Conf is a free data retrieval call binding the contract method 0x17792729.
 //
-// Solidity: function balanceOf(address owner) view returns(uint256)
-func (_Stamp *StampCaller) BalanceOf(opts *bind.CallOpts, owner common.Address) (*big.Int, error) {
+// Solidity: function conf() view returns(string MailBoxName, bool IsConsummable)
+func (_Stamp *StampCaller) Conf(opts *bind.CallOpts) (struct {
+	MailBoxName   string
+	IsConsummable bool
+}, error) {
 	var out []interface{}
-	err := _Stamp.contract.Call(opts, &out, "balanceOf", owner)
+	err := _Stamp.contract.Call(opts, &out, "conf")
 
-	if err != nil {
-		return *new(*big.Int), err
-	}
+	outstruct := new(struct {
+		MailBoxName   string
+		IsConsummable bool
+	})
 
-	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+	outstruct.MailBoxName = out[0].(string)
+	outstruct.IsConsummable = out[1].(bool)
 
-	return out0, err
+	return *outstruct, err
 
 }
 
-// BalanceOf is a free data retrieval call binding the contract method 0x70a08231.
+// Conf is a free data retrieval call binding the contract method 0x17792729.
 //
-// Solidity: function balanceOf(address owner) view returns(uint256)
-func (_Stamp *StampSession) BalanceOf(owner common.Address) (*big.Int, error) {
-	return _Stamp.Contract.BalanceOf(&_Stamp.CallOpts, owner)
+// Solidity: function conf() view returns(string MailBoxName, bool IsConsummable)
+func (_Stamp *StampSession) Conf() (struct {
+	MailBoxName   string
+	IsConsummable bool
+}, error) {
+	return _Stamp.Contract.Conf(&_Stamp.CallOpts)
 }
 
-// BalanceOf is a free data retrieval call binding the contract method 0x70a08231.
+// Conf is a free data retrieval call binding the contract method 0x17792729.
 //
-// Solidity: function balanceOf(address owner) view returns(uint256)
-func (_Stamp *StampCallerSession) BalanceOf(owner common.Address) (*big.Int, error) {
-	return _Stamp.Contract.BalanceOf(&_Stamp.CallOpts, owner)
+// Solidity: function conf() view returns(string MailBoxName, bool IsConsummable)
+func (_Stamp *StampCallerSession) Conf() (struct {
+	MailBoxName   string
+	IsConsummable bool
+}, error) {
+	return _Stamp.Contract.Conf(&_Stamp.CallOpts)
 }
 
 // Decimals is a free data retrieval call binding the contract method 0x313ce567.
@@ -295,12 +312,12 @@ func (_Stamp *StampCallerSession) Decimals() (uint8, error) {
 	return _Stamp.Contract.Decimals(&_Stamp.CallOpts)
 }
 
-// GetOwner is a free data retrieval call binding the contract method 0x893d20e8.
+// Owner is a free data retrieval call binding the contract method 0x8da5cb5b.
 //
-// Solidity: function getOwner() view returns(address)
-func (_Stamp *StampCaller) GetOwner(opts *bind.CallOpts) (common.Address, error) {
+// Solidity: function owner() view returns(address)
+func (_Stamp *StampCaller) Owner(opts *bind.CallOpts) (common.Address, error) {
 	var out []interface{}
-	err := _Stamp.contract.Call(opts, &out, "getOwner")
+	err := _Stamp.contract.Call(opts, &out, "owner")
 
 	if err != nil {
 		return *new(common.Address), err
@@ -312,80 +329,18 @@ func (_Stamp *StampCaller) GetOwner(opts *bind.CallOpts) (common.Address, error)
 
 }
 
-// GetOwner is a free data retrieval call binding the contract method 0x893d20e8.
+// Owner is a free data retrieval call binding the contract method 0x8da5cb5b.
 //
-// Solidity: function getOwner() view returns(address)
-func (_Stamp *StampSession) GetOwner() (common.Address, error) {
-	return _Stamp.Contract.GetOwner(&_Stamp.CallOpts)
+// Solidity: function owner() view returns(address)
+func (_Stamp *StampSession) Owner() (common.Address, error) {
+	return _Stamp.Contract.Owner(&_Stamp.CallOpts)
 }
 
-// GetOwner is a free data retrieval call binding the contract method 0x893d20e8.
+// Owner is a free data retrieval call binding the contract method 0x8da5cb5b.
 //
-// Solidity: function getOwner() view returns(address)
-func (_Stamp *StampCallerSession) GetOwner() (common.Address, error) {
-	return _Stamp.Contract.GetOwner(&_Stamp.CallOpts)
-}
-
-// Name is a free data retrieval call binding the contract method 0x06fdde03.
-//
-// Solidity: function name() view returns(string)
-func (_Stamp *StampCaller) Name(opts *bind.CallOpts) (string, error) {
-	var out []interface{}
-	err := _Stamp.contract.Call(opts, &out, "name")
-
-	if err != nil {
-		return *new(string), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(string)).(*string)
-
-	return out0, err
-
-}
-
-// Name is a free data retrieval call binding the contract method 0x06fdde03.
-//
-// Solidity: function name() view returns(string)
-func (_Stamp *StampSession) Name() (string, error) {
-	return _Stamp.Contract.Name(&_Stamp.CallOpts)
-}
-
-// Name is a free data retrieval call binding the contract method 0x06fdde03.
-//
-// Solidity: function name() view returns(string)
-func (_Stamp *StampCallerSession) Name() (string, error) {
-	return _Stamp.Contract.Name(&_Stamp.CallOpts)
-}
-
-// Symbol is a free data retrieval call binding the contract method 0x95d89b41.
-//
-// Solidity: function symbol() view returns(string)
-func (_Stamp *StampCaller) Symbol(opts *bind.CallOpts) (string, error) {
-	var out []interface{}
-	err := _Stamp.contract.Call(opts, &out, "symbol")
-
-	if err != nil {
-		return *new(string), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(string)).(*string)
-
-	return out0, err
-
-}
-
-// Symbol is a free data retrieval call binding the contract method 0x95d89b41.
-//
-// Solidity: function symbol() view returns(string)
-func (_Stamp *StampSession) Symbol() (string, error) {
-	return _Stamp.Contract.Symbol(&_Stamp.CallOpts)
-}
-
-// Symbol is a free data retrieval call binding the contract method 0x95d89b41.
-//
-// Solidity: function symbol() view returns(string)
-func (_Stamp *StampCallerSession) Symbol() (string, error) {
-	return _Stamp.Contract.Symbol(&_Stamp.CallOpts)
+// Solidity: function owner() view returns(address)
+func (_Stamp *StampCallerSession) Owner() (common.Address, error) {
+	return _Stamp.Contract.Owner(&_Stamp.CallOpts)
 }
 
 // TotalSupply is a free data retrieval call binding the contract method 0x18160ddd.
@@ -419,25 +374,25 @@ func (_Stamp *StampCallerSession) TotalSupply() (*big.Int, error) {
 	return _Stamp.Contract.TotalSupply(&_Stamp.CallOpts)
 }
 
-// Approve is a paid mutator transaction binding the contract method 0x095ea7b3.
+// AdminOp is a paid mutator transaction binding the contract method 0x809b4767.
 //
-// Solidity: function approve(address spender, uint256 value) returns(bool)
-func (_Stamp *StampTransactor) Approve(opts *bind.TransactOpts, spender common.Address, value *big.Int) (*types.Transaction, error) {
-	return _Stamp.contract.Transact(opts, "approve", spender, value)
+// Solidity: function adminOp(address addr, bool isAdd) returns()
+func (_Stamp *StampTransactor) AdminOp(opts *bind.TransactOpts, addr common.Address, isAdd bool) (*types.Transaction, error) {
+	return _Stamp.contract.Transact(opts, "adminOp", addr, isAdd)
 }
 
-// Approve is a paid mutator transaction binding the contract method 0x095ea7b3.
+// AdminOp is a paid mutator transaction binding the contract method 0x809b4767.
 //
-// Solidity: function approve(address spender, uint256 value) returns(bool)
-func (_Stamp *StampSession) Approve(spender common.Address, value *big.Int) (*types.Transaction, error) {
-	return _Stamp.Contract.Approve(&_Stamp.TransactOpts, spender, value)
+// Solidity: function adminOp(address addr, bool isAdd) returns()
+func (_Stamp *StampSession) AdminOp(addr common.Address, isAdd bool) (*types.Transaction, error) {
+	return _Stamp.Contract.AdminOp(&_Stamp.TransactOpts, addr, isAdd)
 }
 
-// Approve is a paid mutator transaction binding the contract method 0x095ea7b3.
+// AdminOp is a paid mutator transaction binding the contract method 0x809b4767.
 //
-// Solidity: function approve(address spender, uint256 value) returns(bool)
-func (_Stamp *StampTransactorSession) Approve(spender common.Address, value *big.Int) (*types.Transaction, error) {
-	return _Stamp.Contract.Approve(&_Stamp.TransactOpts, spender, value)
+// Solidity: function adminOp(address addr, bool isAdd) returns()
+func (_Stamp *StampTransactorSession) AdminOp(addr common.Address, isAdd bool) (*types.Transaction, error) {
+	return _Stamp.Contract.AdminOp(&_Stamp.TransactOpts, addr, isAdd)
 }
 
 // ChangeOwner is a paid mutator transaction binding the contract method 0xa6f9dae1.
@@ -461,93 +416,51 @@ func (_Stamp *StampTransactorSession) ChangeOwner(newOwner common.Address) (*typ
 	return _Stamp.Contract.ChangeOwner(&_Stamp.TransactOpts, newOwner)
 }
 
-// DecreaseAllowance is a paid mutator transaction binding the contract method 0xa457c2d7.
+// Revoke is a paid mutator transaction binding the contract method 0xeac449d9.
 //
-// Solidity: function decreaseAllowance(address spender, uint256 subtractedValue) returns(bool)
-func (_Stamp *StampTransactor) DecreaseAllowance(opts *bind.TransactOpts, spender common.Address, subtractedValue *big.Int) (*types.Transaction, error) {
-	return _Stamp.contract.Transact(opts, "decreaseAllowance", spender, subtractedValue)
+// Solidity: function revoke(address to, uint256 value) returns()
+func (_Stamp *StampTransactor) Revoke(opts *bind.TransactOpts, to common.Address, value *big.Int) (*types.Transaction, error) {
+	return _Stamp.contract.Transact(opts, "revoke", to, value)
 }
 
-// DecreaseAllowance is a paid mutator transaction binding the contract method 0xa457c2d7.
+// Revoke is a paid mutator transaction binding the contract method 0xeac449d9.
 //
-// Solidity: function decreaseAllowance(address spender, uint256 subtractedValue) returns(bool)
-func (_Stamp *StampSession) DecreaseAllowance(spender common.Address, subtractedValue *big.Int) (*types.Transaction, error) {
-	return _Stamp.Contract.DecreaseAllowance(&_Stamp.TransactOpts, spender, subtractedValue)
+// Solidity: function revoke(address to, uint256 value) returns()
+func (_Stamp *StampSession) Revoke(to common.Address, value *big.Int) (*types.Transaction, error) {
+	return _Stamp.Contract.Revoke(&_Stamp.TransactOpts, to, value)
 }
 
-// DecreaseAllowance is a paid mutator transaction binding the contract method 0xa457c2d7.
+// Revoke is a paid mutator transaction binding the contract method 0xeac449d9.
 //
-// Solidity: function decreaseAllowance(address spender, uint256 subtractedValue) returns(bool)
-func (_Stamp *StampTransactorSession) DecreaseAllowance(spender common.Address, subtractedValue *big.Int) (*types.Transaction, error) {
-	return _Stamp.Contract.DecreaseAllowance(&_Stamp.TransactOpts, spender, subtractedValue)
-}
-
-// IncreaseAllowance is a paid mutator transaction binding the contract method 0x39509351.
-//
-// Solidity: function increaseAllowance(address spender, uint256 addedValue) returns(bool)
-func (_Stamp *StampTransactor) IncreaseAllowance(opts *bind.TransactOpts, spender common.Address, addedValue *big.Int) (*types.Transaction, error) {
-	return _Stamp.contract.Transact(opts, "increaseAllowance", spender, addedValue)
-}
-
-// IncreaseAllowance is a paid mutator transaction binding the contract method 0x39509351.
-//
-// Solidity: function increaseAllowance(address spender, uint256 addedValue) returns(bool)
-func (_Stamp *StampSession) IncreaseAllowance(spender common.Address, addedValue *big.Int) (*types.Transaction, error) {
-	return _Stamp.Contract.IncreaseAllowance(&_Stamp.TransactOpts, spender, addedValue)
-}
-
-// IncreaseAllowance is a paid mutator transaction binding the contract method 0x39509351.
-//
-// Solidity: function increaseAllowance(address spender, uint256 addedValue) returns(bool)
-func (_Stamp *StampTransactorSession) IncreaseAllowance(spender common.Address, addedValue *big.Int) (*types.Transaction, error) {
-	return _Stamp.Contract.IncreaseAllowance(&_Stamp.TransactOpts, spender, addedValue)
+// Solidity: function revoke(address to, uint256 value) returns()
+func (_Stamp *StampTransactorSession) Revoke(to common.Address, value *big.Int) (*types.Transaction, error) {
+	return _Stamp.Contract.Revoke(&_Stamp.TransactOpts, to, value)
 }
 
 // Transfer is a paid mutator transaction binding the contract method 0xa9059cbb.
 //
-// Solidity: function transfer(address to, uint256 value) returns(bool)
+// Solidity: function transfer(address to, uint256 value) returns()
 func (_Stamp *StampTransactor) Transfer(opts *bind.TransactOpts, to common.Address, value *big.Int) (*types.Transaction, error) {
 	return _Stamp.contract.Transact(opts, "transfer", to, value)
 }
 
 // Transfer is a paid mutator transaction binding the contract method 0xa9059cbb.
 //
-// Solidity: function transfer(address to, uint256 value) returns(bool)
+// Solidity: function transfer(address to, uint256 value) returns()
 func (_Stamp *StampSession) Transfer(to common.Address, value *big.Int) (*types.Transaction, error) {
 	return _Stamp.Contract.Transfer(&_Stamp.TransactOpts, to, value)
 }
 
 // Transfer is a paid mutator transaction binding the contract method 0xa9059cbb.
 //
-// Solidity: function transfer(address to, uint256 value) returns(bool)
+// Solidity: function transfer(address to, uint256 value) returns()
 func (_Stamp *StampTransactorSession) Transfer(to common.Address, value *big.Int) (*types.Transaction, error) {
 	return _Stamp.Contract.Transfer(&_Stamp.TransactOpts, to, value)
 }
 
-// TransferFrom is a paid mutator transaction binding the contract method 0x23b872dd.
-//
-// Solidity: function transferFrom(address from, address to, uint256 value) returns(bool)
-func (_Stamp *StampTransactor) TransferFrom(opts *bind.TransactOpts, from common.Address, to common.Address, value *big.Int) (*types.Transaction, error) {
-	return _Stamp.contract.Transact(opts, "transferFrom", from, to, value)
-}
-
-// TransferFrom is a paid mutator transaction binding the contract method 0x23b872dd.
-//
-// Solidity: function transferFrom(address from, address to, uint256 value) returns(bool)
-func (_Stamp *StampSession) TransferFrom(from common.Address, to common.Address, value *big.Int) (*types.Transaction, error) {
-	return _Stamp.Contract.TransferFrom(&_Stamp.TransactOpts, from, to, value)
-}
-
-// TransferFrom is a paid mutator transaction binding the contract method 0x23b872dd.
-//
-// Solidity: function transferFrom(address from, address to, uint256 value) returns(bool)
-func (_Stamp *StampTransactorSession) TransferFrom(from common.Address, to common.Address, value *big.Int) (*types.Transaction, error) {
-	return _Stamp.Contract.TransferFrom(&_Stamp.TransactOpts, from, to, value)
-}
-
-// StampApprovalIterator is returned from FilterApproval and is used to iterate over the raw logs and unpacked data for Approval events raised by the Stamp contract.
-type StampApprovalIterator struct {
-	Event *StampApproval // Event containing the contract specifics and raw log
+// StampAdminOPIterator is returned from FilterAdminOP and is used to iterate over the raw logs and unpacked data for AdminOP events raised by the Stamp contract.
+type StampAdminOPIterator struct {
+	Event *StampAdminOP // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -561,7 +474,7 @@ type StampApprovalIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *StampApprovalIterator) Next() bool {
+func (it *StampAdminOPIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -570,7 +483,7 @@ func (it *StampApprovalIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(StampApproval)
+			it.Event = new(StampAdminOP)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -585,7 +498,7 @@ func (it *StampApprovalIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(StampApproval)
+		it.Event = new(StampAdminOP)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -601,61 +514,52 @@ func (it *StampApprovalIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *StampApprovalIterator) Error() error {
+func (it *StampAdminOPIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *StampApprovalIterator) Close() error {
+func (it *StampAdminOPIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// StampApproval represents a Approval event raised by the Stamp contract.
-type StampApproval struct {
-	Owner   common.Address
-	Spender common.Address
-	Value   *big.Int
-	Raw     types.Log // Blockchain specific contextual infos
+// StampAdminOP represents a AdminOP event raised by the Stamp contract.
+type StampAdminOP struct {
+	NewAdmin common.Address
+	Add      bool
+	Raw      types.Log // Blockchain specific contextual infos
 }
 
-// FilterApproval is a free log retrieval operation binding the contract event 0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925.
+// FilterAdminOP is a free log retrieval operation binding the contract event 0x1994fc2eb43ee6b946efd903e39930076e6b3241d31ff0ffe9e583b5b913470d.
 //
-// Solidity: event Approval(address indexed owner, address indexed spender, uint256 value)
-func (_Stamp *StampFilterer) FilterApproval(opts *bind.FilterOpts, owner []common.Address, spender []common.Address) (*StampApprovalIterator, error) {
+// Solidity: event AdminOP(address indexed newAdmin, bool add)
+func (_Stamp *StampFilterer) FilterAdminOP(opts *bind.FilterOpts, newAdmin []common.Address) (*StampAdminOPIterator, error) {
 
-	var ownerRule []interface{}
-	for _, ownerItem := range owner {
-		ownerRule = append(ownerRule, ownerItem)
-	}
-	var spenderRule []interface{}
-	for _, spenderItem := range spender {
-		spenderRule = append(spenderRule, spenderItem)
+	var newAdminRule []interface{}
+	for _, newAdminItem := range newAdmin {
+		newAdminRule = append(newAdminRule, newAdminItem)
 	}
 
-	logs, sub, err := _Stamp.contract.FilterLogs(opts, "Approval", ownerRule, spenderRule)
+	logs, sub, err := _Stamp.contract.FilterLogs(opts, "AdminOP", newAdminRule)
 	if err != nil {
 		return nil, err
 	}
-	return &StampApprovalIterator{contract: _Stamp.contract, event: "Approval", logs: logs, sub: sub}, nil
+	return &StampAdminOPIterator{contract: _Stamp.contract, event: "AdminOP", logs: logs, sub: sub}, nil
 }
 
-// WatchApproval is a free log subscription operation binding the contract event 0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925.
+// WatchAdminOP is a free log subscription operation binding the contract event 0x1994fc2eb43ee6b946efd903e39930076e6b3241d31ff0ffe9e583b5b913470d.
 //
-// Solidity: event Approval(address indexed owner, address indexed spender, uint256 value)
-func (_Stamp *StampFilterer) WatchApproval(opts *bind.WatchOpts, sink chan<- *StampApproval, owner []common.Address, spender []common.Address) (event.Subscription, error) {
+// Solidity: event AdminOP(address indexed newAdmin, bool add)
+func (_Stamp *StampFilterer) WatchAdminOP(opts *bind.WatchOpts, sink chan<- *StampAdminOP, newAdmin []common.Address) (event.Subscription, error) {
 
-	var ownerRule []interface{}
-	for _, ownerItem := range owner {
-		ownerRule = append(ownerRule, ownerItem)
-	}
-	var spenderRule []interface{}
-	for _, spenderItem := range spender {
-		spenderRule = append(spenderRule, spenderItem)
+	var newAdminRule []interface{}
+	for _, newAdminItem := range newAdmin {
+		newAdminRule = append(newAdminRule, newAdminItem)
 	}
 
-	logs, sub, err := _Stamp.contract.WatchLogs(opts, "Approval", ownerRule, spenderRule)
+	logs, sub, err := _Stamp.contract.WatchLogs(opts, "AdminOP", newAdminRule)
 	if err != nil {
 		return nil, err
 	}
@@ -665,8 +569,8 @@ func (_Stamp *StampFilterer) WatchApproval(opts *bind.WatchOpts, sink chan<- *St
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(StampApproval)
-				if err := _Stamp.contract.UnpackLog(event, "Approval", log); err != nil {
+				event := new(StampAdminOP)
+				if err := _Stamp.contract.UnpackLog(event, "AdminOP", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -687,12 +591,12 @@ func (_Stamp *StampFilterer) WatchApproval(opts *bind.WatchOpts, sink chan<- *St
 	}), nil
 }
 
-// ParseApproval is a log parse operation binding the contract event 0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925.
+// ParseAdminOP is a log parse operation binding the contract event 0x1994fc2eb43ee6b946efd903e39930076e6b3241d31ff0ffe9e583b5b913470d.
 //
-// Solidity: event Approval(address indexed owner, address indexed spender, uint256 value)
-func (_Stamp *StampFilterer) ParseApproval(log types.Log) (*StampApproval, error) {
-	event := new(StampApproval)
-	if err := _Stamp.contract.UnpackLog(event, "Approval", log); err != nil {
+// Solidity: event AdminOP(address indexed newAdmin, bool add)
+func (_Stamp *StampFilterer) ParseAdminOP(log types.Log) (*StampAdminOP, error) {
+	event := new(StampAdminOP)
+	if err := _Stamp.contract.UnpackLog(event, "AdminOP", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
@@ -852,6 +756,151 @@ func (_Stamp *StampFilterer) ParseOwnerSet(log types.Log) (*StampOwnerSet, error
 	return event, nil
 }
 
+// StampRevokeIterator is returned from FilterRevoke and is used to iterate over the raw logs and unpacked data for Revoke events raised by the Stamp contract.
+type StampRevokeIterator struct {
+	Event *StampRevoke // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *StampRevokeIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(StampRevoke)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(StampRevoke)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *StampRevokeIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *StampRevokeIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// StampRevoke represents a Revoke event raised by the Stamp contract.
+type StampRevoke struct {
+	To    common.Address
+	Value *big.Int
+	Raw   types.Log // Blockchain specific contextual infos
+}
+
+// FilterRevoke is a free log retrieval operation binding the contract event 0xec9ab91322523c899ede7830ec9bfc992b5981cdcc27b91162fb23de5791117b.
+//
+// Solidity: event Revoke(address indexed to, uint256 value)
+func (_Stamp *StampFilterer) FilterRevoke(opts *bind.FilterOpts, to []common.Address) (*StampRevokeIterator, error) {
+
+	var toRule []interface{}
+	for _, toItem := range to {
+		toRule = append(toRule, toItem)
+	}
+
+	logs, sub, err := _Stamp.contract.FilterLogs(opts, "Revoke", toRule)
+	if err != nil {
+		return nil, err
+	}
+	return &StampRevokeIterator{contract: _Stamp.contract, event: "Revoke", logs: logs, sub: sub}, nil
+}
+
+// WatchRevoke is a free log subscription operation binding the contract event 0xec9ab91322523c899ede7830ec9bfc992b5981cdcc27b91162fb23de5791117b.
+//
+// Solidity: event Revoke(address indexed to, uint256 value)
+func (_Stamp *StampFilterer) WatchRevoke(opts *bind.WatchOpts, sink chan<- *StampRevoke, to []common.Address) (event.Subscription, error) {
+
+	var toRule []interface{}
+	for _, toItem := range to {
+		toRule = append(toRule, toItem)
+	}
+
+	logs, sub, err := _Stamp.contract.WatchLogs(opts, "Revoke", toRule)
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(StampRevoke)
+				if err := _Stamp.contract.UnpackLog(event, "Revoke", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseRevoke is a log parse operation binding the contract event 0xec9ab91322523c899ede7830ec9bfc992b5981cdcc27b91162fb23de5791117b.
+//
+// Solidity: event Revoke(address indexed to, uint256 value)
+func (_Stamp *StampFilterer) ParseRevoke(log types.Log) (*StampRevoke, error) {
+	event := new(StampRevoke)
+	if err := _Stamp.contract.UnpackLog(event, "Revoke", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
 // StampTransferIterator is returned from FilterTransfer and is used to iterate over the raw logs and unpacked data for Transfer events raised by the Stamp contract.
 type StampTransferIterator struct {
 	Event *StampTransfer // Event containing the contract specifics and raw log
@@ -921,48 +970,39 @@ func (it *StampTransferIterator) Close() error {
 
 // StampTransfer represents a Transfer event raised by the Stamp contract.
 type StampTransfer struct {
-	From  common.Address
 	To    common.Address
 	Value *big.Int
 	Raw   types.Log // Blockchain specific contextual infos
 }
 
-// FilterTransfer is a free log retrieval operation binding the contract event 0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef.
+// FilterTransfer is a free log retrieval operation binding the contract event 0x69ca02dd4edd7bf0a4abb9ed3b7af3f14778db5d61921c7dc7cd545266326de2.
 //
-// Solidity: event Transfer(address indexed from, address indexed to, uint256 value)
-func (_Stamp *StampFilterer) FilterTransfer(opts *bind.FilterOpts, from []common.Address, to []common.Address) (*StampTransferIterator, error) {
+// Solidity: event Transfer(address indexed to, uint256 value)
+func (_Stamp *StampFilterer) FilterTransfer(opts *bind.FilterOpts, to []common.Address) (*StampTransferIterator, error) {
 
-	var fromRule []interface{}
-	for _, fromItem := range from {
-		fromRule = append(fromRule, fromItem)
-	}
 	var toRule []interface{}
 	for _, toItem := range to {
 		toRule = append(toRule, toItem)
 	}
 
-	logs, sub, err := _Stamp.contract.FilterLogs(opts, "Transfer", fromRule, toRule)
+	logs, sub, err := _Stamp.contract.FilterLogs(opts, "Transfer", toRule)
 	if err != nil {
 		return nil, err
 	}
 	return &StampTransferIterator{contract: _Stamp.contract, event: "Transfer", logs: logs, sub: sub}, nil
 }
 
-// WatchTransfer is a free log subscription operation binding the contract event 0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef.
+// WatchTransfer is a free log subscription operation binding the contract event 0x69ca02dd4edd7bf0a4abb9ed3b7af3f14778db5d61921c7dc7cd545266326de2.
 //
-// Solidity: event Transfer(address indexed from, address indexed to, uint256 value)
-func (_Stamp *StampFilterer) WatchTransfer(opts *bind.WatchOpts, sink chan<- *StampTransfer, from []common.Address, to []common.Address) (event.Subscription, error) {
+// Solidity: event Transfer(address indexed to, uint256 value)
+func (_Stamp *StampFilterer) WatchTransfer(opts *bind.WatchOpts, sink chan<- *StampTransfer, to []common.Address) (event.Subscription, error) {
 
-	var fromRule []interface{}
-	for _, fromItem := range from {
-		fromRule = append(fromRule, fromItem)
-	}
 	var toRule []interface{}
 	for _, toItem := range to {
 		toRule = append(toRule, toItem)
 	}
 
-	logs, sub, err := _Stamp.contract.WatchLogs(opts, "Transfer", fromRule, toRule)
+	logs, sub, err := _Stamp.contract.WatchLogs(opts, "Transfer", toRule)
 	if err != nil {
 		return nil, err
 	}
@@ -994,9 +1034,9 @@ func (_Stamp *StampFilterer) WatchTransfer(opts *bind.WatchOpts, sink chan<- *St
 	}), nil
 }
 
-// ParseTransfer is a log parse operation binding the contract event 0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef.
+// ParseTransfer is a log parse operation binding the contract event 0x69ca02dd4edd7bf0a4abb9ed3b7af3f14778db5d61921c7dc7cd545266326de2.
 //
-// Solidity: event Transfer(address indexed from, address indexed to, uint256 value)
+// Solidity: event Transfer(address indexed to, uint256 value)
 func (_Stamp *StampFilterer) ParseTransfer(log types.Log) (*StampTransfer, error) {
 	event := new(StampTransfer)
 	if err := _Stamp.contract.UnpackLog(event, "Transfer", log); err != nil {

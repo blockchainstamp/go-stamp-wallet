@@ -5,6 +5,7 @@ go 1.19
 require (
 	github.com/btcsuite/btcutil v1.0.2
 	github.com/ethereum/go-ethereum v1.10.26
+	github.com/sirupsen/logrus v1.9.0
 	github.com/syndtr/goleveldb v1.0.1-0.20210819022825-2ae1ddf74ef7
 	golang.org/x/crypto v0.5.0
 

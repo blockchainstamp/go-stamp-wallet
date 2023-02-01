@@ -17,21 +17,23 @@ var (
 	InvalidAddr = errors.New("invalid address")
 )
 
-func PubToAddr(key []byte) WalletAddr {
+func PubToAddr(key []byte) (WalletAddr, string) {
 	codedKey := base58.Encode(key)
+	var addr, suffix = "", ""
 	if len(codedKey) > AccLen {
-		codedKey = string([]byte(codedKey)[:AccLen])
+		addr = string([]byte(codedKey)[:AccLen])
+		suffix = string([]byte(codedKey)[AccLen:])
 	}
-	return WalletAddr(AccPrefix + codedKey)
+	return WalletAddr(AccPrefix + addr), suffix
 }
 
-func RecoverPub(addr WalletAddr, sub string) ([]byte, error) {
+func RecoverPub(addr WalletAddr, suffix string) ([]byte, error) {
 	if len(addr) < AccLen {
 		return nil, InvalidAddr
 	}
-	source := string(addr) + sub
-	source = strings.TrimPrefix(source, AccPrefix)
-	return base58.Decode(source), nil
+	source := strings.TrimPrefix(string(addr), AccPrefix)
+	prefix := base58.Decode(source + suffix)
+	return prefix, nil
 }
 
 type StampAddr string
