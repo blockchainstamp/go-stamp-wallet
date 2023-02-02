@@ -8,7 +8,6 @@ require (
 	github.com/sirupsen/logrus v1.9.0
 	github.com/syndtr/goleveldb v1.0.1-0.20210819022825-2ae1ddf74ef7
 	golang.org/x/crypto v0.5.0
-
 )
 
 require (
