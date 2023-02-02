@@ -13,8 +13,7 @@ import (
 const (
 	WalletDetailsDBKEY = "_wallet_details_db_key_"
 	StampDetailsDBKEY  = "_stamp_details_db_key_"
-	AllWalletDBKey     = "_stamp_all_wallet_db_key_"
-	WalletKeySeparator = '|'
+	AllWalletDBKey     = "_stamp_all_wallet_db_key_V2_"
 )
 
 var (
@@ -25,7 +24,8 @@ var (
 	SErrActiveStamp  = errors.New("no active stamp")
 	SErrInvalid      = errors.New("invalid stamp raw data")
 	SErrInsufficient = errors.New("insufficient fund")
-	SErrMailVerify   = errors.New("stamp not for such mail id")
+	SErrWInUsed      = errors.New("wallet is in used")
+	SErrWDuplicated  = errors.New("wallet duplicated")
 )
 
 func walletKey(wAddr comm.WalletAddr) []byte {
@@ -67,8 +67,8 @@ func (sdk *SDK) ActiveWallet(walletAddr comm.WalletAddr, auth string) (comm.Wall
 	return wallet, nil
 }
 
-func (sdk *SDK) CreateWallet(auth string) (comm.Wallet, error) {
-	w, e := comm.CreateWallet(auth)
+func (sdk *SDK) CreateWallet(auth, name string) (comm.Wallet, error) {
+	w, e := comm.CreateWallet(auth, name)
 	if e != nil {
 		_sdkLog.Warn(e)
 		return nil, e
@@ -80,12 +80,53 @@ func (sdk *SDK) CreateWallet(auth string) (comm.Wallet, error) {
 		return nil, e
 	}
 
-	e = sdk.database.AppendString(AllWalletDBKey, WalletKeySeparator, string(w.Address()))
+	e = sdk.database.AppendString(AllWalletDBKey, string(w.Address()))
 	if e != nil {
 		_sdkLog.Warn(e)
 		return nil, e
 	}
 	return w, nil
+}
+func (sdk *SDK) RemoveWallet(addr comm.WalletAddr) error {
+
+	if addr == sdk.activeWallet.Address() {
+		return SErrWInUsed
+	}
+	ok, _ := sdk.database.Has(walletKey(addr), nil)
+	if ok {
+		return SErrWDuplicated
+	}
+	return sdk.database.Del(walletKey(addr))
+}
+
+func (sdk *SDK) ImportWallet(walletJson, auth string) (comm.Wallet, error) {
+	var wallet = &comm.SimpleWallet{}
+	err := json.Unmarshal([]byte(walletJson), wallet)
+	if err != nil {
+		return nil, err
+	}
+	err = wallet.Open(auth)
+	if err != nil {
+		return nil, err
+	}
+
+	key := walletKey(wallet.Addr)
+	ok, _ := sdk.database.Has(key, nil)
+	if ok {
+		return nil, SErrWDuplicated
+	}
+	err = sdk.database.SaveJsonObj(key, wallet)
+	if err != nil {
+		_sdkLog.Warn(err)
+		return nil, err
+	}
+
+	err = sdk.database.AppendString(AllWalletDBKey, string(wallet.Address()))
+	if err != nil {
+		_sdkLog.Warn(err)
+		return nil, err
+	}
+	return wallet, nil
 }
 
 func (sdk *SDK) PostStamp(sData comm.StampData) (comm.Stamp, error) {

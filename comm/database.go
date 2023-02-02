@@ -56,14 +56,50 @@ func (db *SDataBase) GetInt(key string) uint64 {
 	return binary.BigEndian.Uint64(data)
 }
 
-func (db *SDataBase) AppendString(key string, sep byte, newV string) error {
-	var data []byte
+func (db *SDataBase) AppendString(key string, newV string) error {
+	var (
+		data []byte
+		vals = make(map[string]struct{}, 0)
+		err  error
+	)
 	data, _ = db.Get([]byte(key), nil)
-	data = append(data, sep)
-	data = append(data, []byte(newV)...)
+	if data != nil {
+		err = json.Unmarshal(data, &vals)
+		if err != nil {
+			return err
+		}
+	}
+	vals[newV] = struct{}{}
+	data, err = json.Marshal(vals)
+	if err != nil {
+		return err
+	}
 
 	return db.Put([]byte(key), data, nil)
 }
+
+func (db *SDataBase) TrimString(key string, trimV string) error {
+	var (
+		data []byte
+		vals = make(map[string]struct{}, 0)
+		err  error
+	)
+	data, _ = db.Get([]byte(key), nil)
+	if data == nil {
+		return nil
+	}
+	err = json.Unmarshal(data, &vals)
+	if err != nil {
+		return err
+	}
+	delete(vals, trimV)
+	data, err = json.Marshal(vals)
+	if err != nil {
+		return err
+	}
+	return db.Put([]byte(key), data, nil)
+}
+
 func (db *SDataBase) SaveString(key string, val string) error {
 	wo := &opt.WriteOptions{
 		Sync: true,

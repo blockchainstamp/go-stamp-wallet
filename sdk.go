@@ -39,8 +39,10 @@ func SetLogLevel(level logrus.Level) {
 }
 
 type StampSdk interface {
-	CreateWallet(auth string) (comm.Wallet, error)
+	CreateWallet(auth, name string) (comm.Wallet, error)
+	ImportWallet(walletJson, auth string) (comm.Wallet, error)
 	GetWallet(addr comm.WalletAddr) (comm.Wallet, error)
+	RemoveWallet(addr comm.WalletAddr) error
 	ListAllWalletAddr() string
 	ActiveWallet(walletAddr comm.WalletAddr, auth string) (comm.Wallet, error)
 	PostStamp(sData comm.StampData) (comm.Stamp, error)

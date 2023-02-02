@@ -22,6 +22,8 @@ var (
 )
 
 type Wallet interface {
+	Name() string
+	SetName(nn string)
 	Address() WalletAddr
 	Open(auth string) error
 	Verbose() string
@@ -33,14 +35,15 @@ type Wallet interface {
 }
 
 type SimpleWallet struct {
-	Version string         `json:"version"`
-	Addr    WalletAddr     `json:"address"`
-	EAddr   common.Address `json:"eth_addr"`
-	Cipher  *CipherData    `json:"cipher"`
-	priKey  ed25519.PrivateKey
+	NickName string         `json:"nick_name"`
+	Version  string         `json:"version"`
+	Addr     WalletAddr     `json:"address"`
+	EAddr    common.Address `json:"eth_addr"`
+	Cipher   *CipherData    `json:"cipher"`
+	priKey   ed25519.PrivateKey
 }
 
-func CreateWallet(auth string) (Wallet, error) {
+func CreateWallet(auth, name string) (Wallet, error) {
 	pub, pri, err := ed25519.GenerateKey(rand.Reader)
 	if err != nil {
 		return nil, err
@@ -52,11 +55,12 @@ func CreateWallet(auth string) (Wallet, error) {
 	ethPri := crypto.ToECDSAUnsafe(pri[:crypto.DigestLength])
 	addr, _ := PubToAddr(pub)
 	sw := &SimpleWallet{
-		Version: WalletVersion,
-		Cipher:  cipherTxt,
-		Addr:    addr,
-		EAddr:   crypto.PubkeyToAddress(ethPri.PublicKey),
-		priKey:  pri,
+		NickName: name,
+		Version:  WalletVersion,
+		Cipher:   cipherTxt,
+		Addr:     addr,
+		EAddr:    crypto.PubkeyToAddress(ethPri.PublicKey),
+		priKey:   pri,
 	}
 
 	return sw, nil
@@ -155,4 +159,10 @@ func (sw *SimpleWallet) EthAddr() common.Address {
 func (sw *SimpleWallet) String() string {
 	bs, _ := json.MarshalIndent(sw, "", "\t")
 	return string(bs)
+}
+func (sw *SimpleWallet) Name() string {
+	return sw.NickName
+}
+func (sw *SimpleWallet) SetName(newName string) {
+	sw.NickName = newName
 }
