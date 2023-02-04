@@ -17,8 +17,9 @@ const (
 )
 
 var (
-	WOpenErr   = errors.New("open wallet failed")
-	WVerfiyErr = errors.New("verify signature failed")
+	WOpenErr    = errors.New("open wallet failed")
+	WVerifyErr  = errors.New("verify signature failed")
+	WInvalidSig = errors.New("invalid signature data")
 )
 
 type Wallet interface {
@@ -132,7 +133,9 @@ func VerifyStamp(stamp Stamp) error {
 		err               error
 		data, sig, pubBts []byte
 	)
-
+	if stamp.RawData() == nil || stamp.SigData() == nil {
+		return WInvalidSig
+	}
 	data, _ = json.Marshal(stamp.RawData())
 
 	sig, err = hex.DecodeString(stamp.SigData().Data())
@@ -144,8 +147,11 @@ func VerifyStamp(stamp Stamp) error {
 	if err != nil {
 		return err
 	}
+	if len(pubBts) != ed25519.PublicKeySize {
+		return WVerifyErr
+	}
 	if !ed25519.Verify(pubBts, data, sig) {
-		return WVerfiyErr
+		return WVerifyErr
 	}
 	return nil
 }
