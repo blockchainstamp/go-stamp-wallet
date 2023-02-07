@@ -46,8 +46,8 @@ type StampSdk interface {
 	ListAllWalletAddr() string
 	ActiveWallet(walletAddr comm.WalletAddr, auth string) (comm.Wallet, error)
 	PostStamp(sData comm.StampData) (comm.Stamp, error)
-	SetStamp(user string, stamp comm.StampAddr) error
-	GetStamp(user string) *contract.StampConf
+	ConfigStamp(mailAddr string, stamp comm.StampAddr) error
+	GetStampConf(mailAddr string) *contract.StampConf
 	UpdateStampBalanceAsync(mailUser string)
 	VerifyStamp(stamp, mail string) error
 }

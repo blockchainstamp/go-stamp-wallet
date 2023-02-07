@@ -172,7 +172,7 @@ func (sdk *SDK) GetWallet(addr comm.WalletAddr) (comm.Wallet, error) {
 	return wallet, nil
 }
 
-func (sdk *SDK) SetStamp(mailUser string, sAddr comm.StampAddr) error {
+func (sdk *SDK) ConfigStamp(mailUser string, sAddr comm.StampAddr) error {
 	if len(sAddr) == 0 {
 		delete(sdk.stampConf, mailUser)
 		return nil
@@ -202,7 +202,7 @@ func (sdk *SDK) SetStamp(mailUser string, sAddr comm.StampAddr) error {
 	return nil
 }
 
-func (sdk *SDK) GetStamp(user string) *contract.StampConf {
+func (sdk *SDK) GetStampConf(user string) *contract.StampConf {
 	return sdk.stampConf[user]
 }
 

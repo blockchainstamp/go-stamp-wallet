@@ -18,7 +18,7 @@ var (
 )
 
 func init() {
-	flag.StringVar(&addr, "addr", "0x20B10D21d54D761238BFCD372c2A146586145343", "--addr")
+	flag.StringVar(&addr, "addr", "0xF9Cbfd74808f812a3B8A2337BFC426B2A10Bd74a", "--addr")
 	flag.StringVar(&user, "uid", "", "--uid")
 	flag.StringVar(&priKey, "pri", "", "--pri")
 	flag.Int64Var(&val, "val", 0, "--val")
@@ -43,4 +43,8 @@ func TestTransferToUser(t *testing.T) {
 		t.Fatal(err)
 	}
 	fmt.Sprintln(tx.Hash().String())
+}
+
+func TestStampConfigFromBlockChain(t *testing.T) {
+	fmt.Println(StampConfigFromBlockChain(addr))
 }

@@ -3,6 +3,8 @@ package contract
 import (
 	"context"
 	"crypto/ecdsa"
+	"encoding/json"
+	"fmt"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
@@ -69,14 +71,12 @@ func StampBalanceOfWallet(stampAddr, userAddr common.Address) (StampRecord, erro
 	return ctr.BalanceOf(nil, userAddr)
 }
 
-type StampConf struct {
-	Addr         string
-	MailBox      string
-	IsConsumable bool
-	Balance      map[common.Address]*StampRecord
-}
-
 func StampConfigFromBlockChain(addr string) (*StampConf, error) {
+
+	if !common.IsHexAddress(addr) {
+		return nil, fmt.Errorf("[%s] is invalid blockchain address", addr)
+	}
+
 	cli, err := ethclient.Dial(ChainAPIURL)
 	if err != nil {
 		_scLog.Warn(err)
@@ -101,6 +101,17 @@ func StampConfigFromBlockChain(addr string) (*StampConf, error) {
 	}, nil
 }
 
+type StampConf struct {
+	Addr         string
+	MailBox      string
+	IsConsumable bool
+	Balance      map[common.Address]*StampRecord
+}
+
+func (sc *StampConf) String() string {
+	bts, _ := json.Marshal(sc)
+	return string(bts)
+}
 func (sc *StampConf) GetBalance(ethAddr common.Address, force bool) *StampRecord {
 
 	sr, ok := sc.Balance[ethAddr]
