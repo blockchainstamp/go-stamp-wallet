@@ -93,8 +93,12 @@ func (sdk *SDK) RemoveWallet(addr comm.WalletAddr) error {
 		return SErrWInUsed
 	}
 	ok, _ := sdk.database.Has(walletKey(addr), nil)
-	if ok {
-		return SErrWDuplicated
+	if !ok {
+		return nil
+	}
+	err := sdk.database.TrimString(AllWalletDBKey, string(addr))
+	if err != nil {
+		return err
 	}
 	return sdk.database.Del(walletKey(addr))
 }
