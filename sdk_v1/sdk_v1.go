@@ -89,7 +89,7 @@ func (sdk *SDK) CreateWallet(auth, name string) (comm.Wallet, error) {
 }
 func (sdk *SDK) RemoveWallet(addr comm.WalletAddr) error {
 
-	if addr == sdk.activeWallet.Address() {
+	if sdk.activeWallet != nil && addr == sdk.activeWallet.Address() {
 		return SErrWInUsed
 	}
 	ok, _ := sdk.database.Has(walletKey(addr), nil)
