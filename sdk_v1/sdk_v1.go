@@ -133,7 +133,7 @@ func (sdk *SDK) ImportWallet(walletJson, auth string) (comm.Wallet, error) {
 	return wallet, nil
 }
 
-func (sdk *SDK) PostStamp(sData comm.StampData) (comm.Stamp, error) {
+func (sdk *SDK) PostStamp(mailUser string, sData comm.StampData) (comm.Stamp, error) {
 	rawData := sData.(*comm.RawStamp)
 	if !rawData.IsValidInitData() {
 		_sdkLog.Warn(SErrInvalid)
@@ -144,7 +144,7 @@ func (sdk *SDK) PostStamp(sData comm.StampData) (comm.Stamp, error) {
 		_sdkLog.Warn(SErrActiveWallet)
 		return nil, SErrActiveWallet
 	}
-	sConf, ok := sdk.stampConf[rawData.FromMailAddr]
+	sConf, ok := sdk.stampConf[mailUser]
 	if !ok {
 		_sdkLog.Warn(SErrActiveStamp)
 		return nil, SErrActiveStamp
